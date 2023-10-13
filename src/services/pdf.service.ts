@@ -100,6 +100,7 @@ const generatePDF = async (data: {
       .lineTo(590, 750)
       .stroke(gradient);
 
+
     // Finalize the PDF document
     doc.end();
 
