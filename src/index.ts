@@ -11,6 +11,7 @@ app.get("/ping", (req, res) => {
   res.send("Server is running properly!");
 });
 app.use("/api", pdfRouter);
+app.use(express.static('public'))
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);

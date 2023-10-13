@@ -4,6 +4,7 @@ import { ChartJSNodeCanvas } from 'chartjs-node-canvas';
 import fs from 'fs';
 import path from 'path';
 import PdfDocument from 'pdfkit';
+import { constants } from '../utils/constants';
 import { IBaseResponse } from '../utils/interfaces/common.interface';
 
 
@@ -41,7 +42,8 @@ const generatePDF = async (data: {
       fs.mkdirSync(publicDirectory, {
         recursive: true
       })
-    let pdfPath = path.resolve(publicDirectory, `${new Date().toDateString()}.pdf`)
+    let pdfName = `${Date.now()}.pdf`
+    let pdfPath = path.resolve(publicDirectory, pdfName)
 
     // Create a new PDF document
     const doc = new PdfDocument({
@@ -109,7 +111,7 @@ const generatePDF = async (data: {
       statusCode: HttpStatusCode.Ok,
       success: true,
       data: {
-        pdfLink: !jsonData ? null : ""
+        pdfLink: !jsonData ? null : constants.PUBLIC_FOLDER_URL + pdfName
       }
     }
 
@@ -174,4 +176,4 @@ const generateServerPDF = async (data: {
   })();
 }
 
-export default { generatePDF, generateServerPDF };
+export default { generatePDF };
